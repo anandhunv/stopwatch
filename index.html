@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StopWatch</title>
+    <link rel="icon" href="images/icon.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  
+    <div class="container">
+        <div class="container">
+            <div class="credit">
+                <h5>&copy;<a href="https://github.com/nvanxndhu">anandhu.n.v</a></h5>
+              </div>
+        <img src="images/2744427.jpg" alt="">
+        <div class="card">
+            <h1 id="time">00:00:00</h1>
+          
+          <div class="icon">
+                <img src="images/pause-button .png" alt="" onclick="watchPause()">
+                <img src="images/play-button.png" alt="" onclick="watchStart()">
+                <img src="images/repeat.png" alt="" onclick="watchReset()">
+            </div>
+        </div>
+    </div>
+
+
+    <!-- javascript -->
+
+<script>
+
+let [seconds,minutes,hours]=[0,0,0];
+const time=document.getElementById("time");
+let timer=null;
+
+
+
+function stopWatch(){
+
+//second value increased by every second
+//when it will come to 60 it will restart to 0
+//and increase the minute value by 1
+//minute valuw become 60, hours value to 1
+seconds++;
+if(seconds==60){
+    seconds=0;
+    minutes++;
+    if (minutes==60) {   
+        minutes=0;
+        hours++;
+    }
+}
+let h=hours<10? "0" + hours:hours;
+
+let m=minutes<10? "0" + minutes:minutes;
+let s=seconds<10? "0" + seconds:seconds;
+
+time.innerHTML=`${h}:${m}:${s}`;
+}
+
+function watchStart(){
+    if(timer!=null){
+        clearInterval(timer);
+    }
+   timer= setInterval(stopWatch,1000);
+}
+
+function watchPause(){
+    clearInterval(timer);
+}
+
+function watchReset(){
+    clearInterval(timer);
+    [seconds,minutes,hours]=[0,0,0];
+    time.innerHTML="00:00:00";
+}
+
+
+</script>
+
+</body>
+</html>
